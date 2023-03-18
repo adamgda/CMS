@@ -44,3 +44,16 @@ export const MainButton = styled.button`
     transition: transform 1s;
   }
 `;
+
+export const SimpleButton = styled.a`
+  display: inline-block;
+  border-radius: ${effects.radiusS};
+  color: ${color.white};
+  border: 0.063rem solid white;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background: ${color.white};
+    color: ${color.main};
+  }
+`;

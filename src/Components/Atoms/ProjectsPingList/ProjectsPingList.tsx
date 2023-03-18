@@ -1,18 +1,15 @@
 import React from "react";
-import ErrorTwoToneIcon from "@mui/icons-material/ErrorTwoTone";
 import { ProjectsPingListContainer } from "./ProjectsPingList.styled";
+import Section from "../Section/Section";
+import HandymanTwoToneIcon from "@mui/icons-material/HandymanTwoTone";
 
 const ProjectsPingList = () => {
   return (
-    <ProjectsPingListContainer>
-      [w budowie]
-      {/*<div>*/}
-      {/*  <ErrorTwoToneIcon /> AbsyntPR*/}
-      {/*</div>*/}
-      {/*<div>*/}
-      {/*  <ErrorTwoToneIcon /> Klinika Medyk*/}
-      {/*</div>*/}
-    </ProjectsPingListContainer>
+    <Section title="Projekty offline">
+      <ProjectsPingListContainer>
+        <HandymanTwoToneIcon fontSize="large" />
+      </ProjectsPingListContainer>
+    </Section>
   );
 };
 

@@ -4,7 +4,7 @@ import { SeparatorTypes } from "./Separator.types";
 
 export const SeparatorLine = styled.div`
   display: block;
-  height: 2px;
+  height: 0.125rem;
   background: ${color.background};
   margin: ${(props: SeparatorTypes) => props?.margin} 0;
 `;

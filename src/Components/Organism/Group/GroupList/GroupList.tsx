@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Section from "../../../Atoms/Section/Section";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import UserEditForm from "../GroupEditForm/GroupEditForm";
 import Modal from "../../../../Hocs/Modal/Modal";
 import { GetGroups } from "../../../../Services/GroupService";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
+
 import { GroupListTypes } from "./GroupList.types";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
-import { MainButton } from "../../../Atoms/Form/Button/Button.styled";
+import { SimpleButton } from "../../../Atoms/Form/Button/Button.styled";
 
 const UserList = () => {
   const [groups, setGroups] = useState<Array<GroupListTypes>>([]);
@@ -17,16 +17,10 @@ const UserList = () => {
     type: "groupEdit",
   });
 
-  const loader = useContext(LoaderContext);
-
   const getGroups = () => {
-    loader.show(true);
-    GetGroups(
-      (res: any) => {
-        setGroups(res?.data);
-      },
-      () => loader.show(false)
-    );
+    GetGroups((res: any) => {
+      setGroups(res?.data);
+    });
   };
 
   const closeModal = (): void => {
@@ -37,7 +31,7 @@ const UserList = () => {
     setModalData({ show: true, data: id, type: type });
   };
 
-  const finishCallback = () => {
+  const callback = () => {
     closeModal();
     getGroups();
   };
@@ -79,19 +73,12 @@ const UserList = () => {
             closeCallback={closeModal}
             padding={"1rem 2rem 2rem"}
           >
-            <UserEditForm
-              id={modalData?.data}
-              finishCallback={finishCallback}
-            />
+            <UserEditForm id={modalData?.data || 0} callback={callback} />
           </Modal>
         )}
-        <MainButton
-          type="submit"
-          onClick={() => showModal(null, "add")}
-          style={{ maxWidth: "200px", marginBottom: "0" }}
-        >
+        <SimpleButton type="submit" onClick={() => showModal(null, "add")}>
           <span>Nowa grupa</span>
-        </MainButton>
+        </SimpleButton>
       </>
     </Section>
   );

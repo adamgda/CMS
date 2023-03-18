@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "../../../Atoms/Grid/Grid";
 import MainInput from "../../../Atoms/Form/Input/Input";
 import TopBar from "../../../TopBar/TopBar";
@@ -6,7 +6,6 @@ import FixedButton from "../../../Atoms/Form/FixedButton/FixedButton";
 import FixedDeleteButton from "../../../Atoms/Form/FixedDeleteButton/FixedDeleteButton";
 import Modal from "../../../../Hocs/Modal/Modal";
 import { UserEditFormTypes } from "./UserEditForm.types";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
 import { useForm } from "react-hook-form";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
 import { MainButton } from "../../../Atoms/Form/Button/Button.styled";
@@ -20,7 +19,7 @@ import {
 import { GroupListTypes } from "../../Group/GroupList/GroupList.types";
 import { GetGroups } from "../../../../Services/GroupService";
 
-const UserEditForm = ({ id, finishCallback }: UserEditFormTypes) => {
+const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
   const [groups, setGroups] = useState<Array<GroupListTypes>>([]);
   const [userData, setUserData] = useState<UserFormTypes | null>(null);
   const [modalData, setModalData] = useState<ModalDataTypes>({
@@ -28,7 +27,6 @@ const UserEditForm = ({ id, finishCallback }: UserEditFormTypes) => {
     data: null,
     type: "delete",
   });
-  const loader = useContext(LoaderContext);
 
   const {
     register,
@@ -36,44 +34,27 @@ const UserEditForm = ({ id, finishCallback }: UserEditFormTypes) => {
     formState: { errors },
   } = useForm();
 
-  const getUserData = () => {
+  const getUserData = async () => {
     if (id) {
-      loader.show(true);
-      GetUserDetails(
-        id,
-        (data: UserFormTypes) => setUserData(data),
-        () => loader.show(false)
-      );
+      await GetUserDetails(id, (data: UserFormTypes) => setUserData(data));
     }
   };
 
-  const onSubmit = (data: UserFormTypes) => {
+  const onSubmit = async (data: UserFormTypes) => {
     if (data) {
-      loader.show(true);
       if (id) {
-        EditUserDetails(
-          id,
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        await EditUserDetails(id, data, () => callback());
       } else {
-        AddUser(
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        await AddUser(data, () => callback());
       }
     }
   };
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (id) {
-      loader.show(true);
-      DeleteUser(id, () => {
+      await DeleteUser(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
-        finishCallback();
-        loader.show(false);
+        callback();
       });
     }
   };
@@ -82,20 +63,19 @@ const UserEditForm = ({ id, finishCallback }: UserEditFormTypes) => {
     setModalData({ show: true, data: null, type: "delete" });
   };
 
-  const getGroupsOptionsList = () => {
-    GetGroups(
-      (res: any) => {
-        const data: Array<GroupListTypes> = res?.data;
-        setGroups(data);
-      },
-      () => null
-    );
+  const getGroupsOptionsList = async () => {
+    await GetGroups((res: any) => {
+      const data: Array<GroupListTypes> = res?.data;
+      setGroups(data);
+    });
   };
 
   useEffect(() => {
     getGroupsOptionsList();
     getUserData();
   }, [id]);
+
+  console.log("groups", groups);
 
   return (
     <>

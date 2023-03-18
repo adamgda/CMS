@@ -1,36 +1,37 @@
-import { DeleteApi, GetApi, PostApi, PutApi } from "./ApiService";
+import { Delete, Get, Post, Put } from "./ApiService";
+import { AxiosResponse } from "axios";
+import { GroupResponseTypes } from "./GroupService.types";
 
-export const GetGroups = (callback: Function, finallyCallback: Function) => {
-  return GetApi(`/group`, callback, finallyCallback);
+export const GetGroups = (
+  callback: Function
+): Promise<AxiosResponse<GroupResponseTypes[]> | void> => {
+  return Get(`/group`, callback);
 };
 
 export const GetGroupDetails = (
   id: number,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return GetGroups((res: any) => {
-    callback(res?.data.filter((res: any) => res.id === id)[0]);
-  }, finallyCallback);
+  callback: Function
+): Promise<AxiosResponse<GroupResponseTypes> | void> => {
+  return Get(`/group/${id}`, callback);
 };
 
 export const EditGroupDetails = (
-  id: number,
-  data: any,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return PutApi(`/group/${id}`, data, callback, finallyCallback);
+  data: GroupResponseTypes,
+  callback: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Put(`/group/${data.id}`, data, callback);
 };
 
 export const AddGroup = (
-  data: any,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return PostApi(`/group`, data, callback, finallyCallback);
+  data: GroupResponseTypes,
+  callback: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Post(`/group`, data, callback);
 };
 
-export const DeleteGroup = (id: number, finallyCallback: Function) => {
-  return DeleteApi(`/group/${id}`, finallyCallback);
+export const DeleteGroup = (
+  id: number,
+  callback?: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Delete(`/group/${id}`, callback && callback());
 };

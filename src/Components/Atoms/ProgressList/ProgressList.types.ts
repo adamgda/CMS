@@ -1,5 +1,6 @@
-import { ElementData } from "../../List/Element/Element.types";
+import { ProgressElement } from "../../List/Element/Element.types";
 
 export interface ProgressListTypes {
-  projectData: ElementData;
+  list: Array<ProgressElement>;
+  editCallback: Function;
 }

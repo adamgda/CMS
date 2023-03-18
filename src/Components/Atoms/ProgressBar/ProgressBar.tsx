@@ -6,17 +6,21 @@ import {
 } from "./ProgressBar.styled";
 import ElementTasksInfo from "../../List/Element/Components/ElementTasks/Info/ElementTasksInfo";
 
-const ProgressBar = ({ progress }: ProgressBarTypes) => {
+const ProgressBar = ({ progress }: ProgressBarTypes): JSX.Element => {
   const sum = progress?.length;
   const complete = progress?.filter((el) => el.done).length;
   const currentPercent = (complete / sum) * 100;
 
   return (
     <ProgressBarContainer>
-      <ProgressBarProgress>
-        <div style={{ width: `${currentPercent}%` }} />
-      </ProgressBarProgress>
-      <ElementTasksInfo progress={progress} />
+      {sum > 0 && (
+        <>
+          <ProgressBarProgress>
+            <div style={{ width: `${currentPercent}%` }} />
+          </ProgressBarProgress>
+          <ElementTasksInfo progress={progress} />
+        </>
+      )}
     </ProgressBarContainer>
   );
 };

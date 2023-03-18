@@ -1,25 +1,36 @@
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectHeader from "../../../Atoms/ProjectHeader/ProjectHeader";
 import ProgressList from "../../../Atoms/ProgressList/ProgressList";
 import ProjectDescription from "../../../Atoms/ProjectDescription/ProjectDescription";
-import { ProjectFullElementContainer } from "./ProjectFullElement.styled";
+import { ProjectDataContainer } from "./ProjectFullElement.styled";
 import { ProjectFullElementTypes } from "./ProjectFullElement.types";
-import { ElementData } from "../../../List/Element/Element.types";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
-import { GetProjectDetails } from "../../../../Services/ProjectService";
+
+import {
+  EditProjectDetails,
+  GetProjectDetails,
+} from "../../../../Services/ProjectService";
+import {
+  ProjectProgressTypes,
+  ProjectResponseTypes,
+} from "../../../../Services/ProjectService.types";
 
 const ProjectFullElement = ({ id }: ProjectFullElementTypes): JSX.Element => {
-  const [projectData, setProjectData] = useState<ElementData | null>(null);
-  const loader = useContext(LoaderContext);
+  const [projectData, setProjectData] = useState<ProjectResponseTypes | null>(
+    null
+  );
 
-  const getProjectData = () => {
+  const getProjectData = (): void => {
     if (id) {
-      loader.show(true);
-      GetProjectDetails(
-        id,
-        (res: any) => setProjectData(res?.data),
-        () => loader.show(false)
-      );
+      GetProjectDetails(id, (res: any) => {
+        setProjectData(res?.data);
+      });
+    }
+  };
+
+  const projectUpdate = (updatedList: Array<ProjectProgressTypes>): void => {
+    if (id && projectData) {
+      projectData.progress = updatedList;
+      EditProjectDetails(id, projectData, () => setProjectData(projectData));
     }
   };
 
@@ -27,20 +38,27 @@ const ProjectFullElement = ({ id }: ProjectFullElementTypes): JSX.Element => {
     getProjectData();
   }, [id]);
 
-  return (
-    <ProjectFullElementContainer>
-      {projectData && (
-        <>
-          <ProjectHeader
-            name={projectData?.name}
-            url={projectData?.link}
-            progress={projectData?.progress}
-          />
-          <ProgressList projectData={projectData} />
+  //projectData?.progress?.filter((el) => el.done).length
+
+  return projectData ? (
+    <>
+      <ProjectHeader
+        name={projectData?.name}
+        url={projectData?.link}
+        progress={projectData?.progress}
+      />
+      <ProjectDataContainer>
+        <ProgressList
+          list={projectData?.progress}
+          editCallback={projectUpdate}
+        />
+        {projectData?.description && (
           <ProjectDescription description={projectData?.description} />
-        </>
-      )}
-    </ProjectFullElementContainer>
+        )}
+      </ProjectDataContainer>
+    </>
+  ) : (
+    <>...</>
   );
 };
 

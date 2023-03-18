@@ -47,7 +47,7 @@ export const MainInputContainer = styled.div`
     z-index: 2;
     box-shadow: ${effects.shadow};
     outline: none !important;
-    line-height: 1.3rem;
+    line-height: 160%;
   }
 
   select {

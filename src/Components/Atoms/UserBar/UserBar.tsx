@@ -1,21 +1,22 @@
 import React from "react";
-import { UserBarContainer } from "./UserBar.styled";
-import { GetUserData, Logout } from "../../../Services/AuthService";
-import { NavLink } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { UserBarContainer } from "./UserBar.styled";
+import { LogOut } from "../../../Services/AuthService";
+import { NavLink } from "react-router-dom";
+import { IsAdmin, MyLogin } from "../../../Services/MeService";
 
 const UserBar = () => {
   return (
     <UserBarContainer>
-      <div>{GetUserData()?.login}</div>
+      <div>{MyLogin || "---"}</div>
       <div>
-        {GetUserData()?.is_admin && (
+        {IsAdmin && (
           <NavLink to="/settings">
             <SettingsIcon />
           </NavLink>
         )}
-        <a onClick={() => Logout()}>
+        <a onClick={() => LogOut()}>
           <PowerSettingsNewIcon />
         </a>
       </div>

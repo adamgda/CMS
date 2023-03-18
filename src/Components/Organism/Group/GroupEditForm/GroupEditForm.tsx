@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "../../../Atoms/Grid/Grid";
 import MainInput from "../../../Atoms/Form/Input/Input";
 import TopBar from "../../../TopBar/TopBar";
 import FixedButton from "../../../Atoms/Form/FixedButton/FixedButton";
 import FixedDeleteButton from "../../../Atoms/Form/FixedDeleteButton/FixedDeleteButton";
 import Modal from "../../../../Hocs/Modal/Modal";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
+
 import { useForm } from "react-hook-form";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
 import { MainButton } from "../../../Atoms/Form/Button/Button.styled";
@@ -16,15 +16,15 @@ import {
   EditGroupDetails,
   GetGroupDetails,
 } from "../../../../Services/GroupService";
+import { GroupResponseTypes } from "../../../../Services/GroupService.types";
 
-const GroupEditForm = ({ id, finishCallback }: GroupEditFormTypes) => {
-  const [groupData, setGroupData] = useState<GroupEditFormTypes | null>(null);
+const GroupEditForm = ({ id, callback }: GroupEditFormTypes) => {
+  const [groupData, setGroupData] = useState<GroupResponseTypes>();
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
     data: null,
     type: "delete",
   });
-  const loader = useContext(LoaderContext);
 
   const {
     register,
@@ -34,42 +34,25 @@ const GroupEditForm = ({ id, finishCallback }: GroupEditFormTypes) => {
 
   const getGroupData = () => {
     if (id) {
-      loader.show(true);
-      GetGroupDetails(
-        id,
-        (data: GroupEditFormTypes) => setGroupData(data),
-        () => loader.show(false)
-      );
+      GetGroupDetails(id, (data: GroupResponseTypes) => setGroupData(data));
     }
   };
 
-  const onSubmit = (data: GroupEditFormTypes) => {
+  const onSubmit = (data: GroupResponseTypes) => {
     if (data) {
-      loader.show(true);
       if (id) {
-        EditGroupDetails(
-          id,
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        return EditGroupDetails({ id: data.id, ...data }, () => callback());
       } else {
-        AddGroup(
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        return AddGroup(data, () => callback());
       }
     }
   };
 
   const onDelete = () => {
     if (id) {
-      loader.show(true);
-      DeleteGroup(id, () => {
+      return DeleteGroup(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
-        finishCallback();
-        loader.show(false);
+        callback();
       });
     }
   };

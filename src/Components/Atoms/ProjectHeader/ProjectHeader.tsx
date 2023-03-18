@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProjectHeaderTypes } from "./ProjectHeader.types";
 import { ProjectHeaderContainer } from "./ProjectHeader.styled";
 import ProgressBar from "../ProgressBar/ProgressBar";

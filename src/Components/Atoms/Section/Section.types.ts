@@ -2,4 +2,6 @@ import { ElementTitleTypes } from "../../List/Element/Components/ElementTitle/El
 
 export interface SectionTypes extends ElementTitleTypes {
   children: JSX.Element;
+  title: string;
+  titleComponent?: JSX.Element;
 }

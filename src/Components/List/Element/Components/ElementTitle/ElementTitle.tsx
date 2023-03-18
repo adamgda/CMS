@@ -2,7 +2,7 @@ import React from "react";
 import { ElementTitleContainer } from "./ElementTitle.styled";
 import { ElementTitleTypes } from "./ElementTitle.types";
 
-const ElementTitle = ({ title, link }: ElementTitleTypes) => {
+const ElementTitle = ({ title, link, children }: ElementTitleTypes) => {
   return (
     <ElementTitleContainer>
       {title}
@@ -13,6 +13,7 @@ const ElementTitle = ({ title, link }: ElementTitleTypes) => {
           </a>
         </small>
       )}
+      {children}
     </ElementTitleContainer>
   );
 };

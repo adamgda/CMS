@@ -31,6 +31,6 @@ export const AppContainer = styled.div`
   }
 
   .pageBody.loading {
-    filter: blur(5px);
+    filter: blur(0.313rem);
   }
 `;

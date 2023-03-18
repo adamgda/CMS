@@ -1,8 +1,9 @@
 import React from "react";
-import { FixedButtonTypes } from "./FixedButton.types";
-import { FixedButtonContainer } from "./FixedButton.styled";
 import SaveTwoToneIcon from "@mui/icons-material/SaveTwoTone";
 import CreateNewFolderTwoToneIcon from "@mui/icons-material/CreateNewFolderTwoTone";
+import CreateTwoToneIcon from "@mui/icons-material/CreateTwoTone";
+import { FixedButtonTypes } from "./FixedButton.types";
+import { FixedButtonContainer } from "./FixedButton.styled";
 
 const FixedButton = ({
   type = "save",
@@ -16,13 +17,26 @@ const FixedButton = ({
     callback && callback();
   };
 
+  const buttonIcon = (): JSX.Element => {
+    switch (type) {
+      case "save":
+        return <SaveTwoToneIcon />;
+      case "edit":
+        return <CreateTwoToneIcon />;
+      case "new":
+        return <CreateNewFolderTwoToneIcon />;
+      default:
+        return <>?</>;
+    }
+  };
+
   return (
     <FixedButtonContainer
       onClick={(e) => !isSaveButton && triggerCallback(e)}
       noBorder={noBorder}
       type={isSaveButton ? "submit" : "button"}
     >
-      {isSaveButton ? <SaveTwoToneIcon /> : <CreateNewFolderTwoToneIcon />}
+      {buttonIcon()}
     </FixedButtonContainer>
   );
 };

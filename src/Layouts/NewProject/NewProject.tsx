@@ -18,7 +18,7 @@ const NewProject = () => {
       <PageContent>
         <DashboardContainer>
           <Section title="Nowy projekt">
-            <ProjectEditForm id={null} finishCallback={addProject} />
+            <ProjectEditForm id={null} callback={addProject} />
           </Section>
         </DashboardContainer>
       </PageContent>

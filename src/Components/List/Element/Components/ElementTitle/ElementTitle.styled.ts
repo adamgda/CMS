@@ -7,10 +7,11 @@ export const ElementTitleContainer = styled.div`
   font-family: ${font.main};
   color: ${color.white};
   font-weight: bold;
+  position: relative;
 
   svg {
     color: ${color.white};
-    margin: 0 0 0 10px;
+    margin: 0 0 0 0.625rem;
   }
 
   small {
@@ -25,6 +26,24 @@ export const ElementTitleContainer = styled.div`
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .titleButton {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.875rem;
+    background: ${color.main};
+    color: #fff;
+    border-color: ${color.main};
+
+    &:hover {
+      text-decoration: none;
+      background: #fff;
+      border-color: #fff;
+      color: ${color.main};
     }
   }
 `;

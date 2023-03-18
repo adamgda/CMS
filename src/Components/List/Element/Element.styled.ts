@@ -8,7 +8,7 @@ export const ElementContainer = styled.div`
   display: flex;
   margin: 0 0.75rem 1.5rem;
   background: ${color.thirdBackground};
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: ${effects.radius};
   width: calc(
     ${(props: ElementStyledTypes) => (props.fullWidth ? 100 : 50)}% - 2rem
@@ -16,14 +16,10 @@ export const ElementContainer = styled.div`
   font-family: ${font.main};
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   & > div:first-of-type {
     width: 100%;
-  }
-
-  &:hover div {
-    opacity: 1;
-    transition: opacity 0.75s;
   }
 
   @media screen and (min-width: 1600px) {

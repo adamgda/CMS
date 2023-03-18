@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Modal from "../../Hocs/Modal/Modal";
 import Grid from "../../Components/Atoms/Grid/Grid";
 import Logo from "../../Components/Atoms/Logo/Logo";
@@ -8,29 +8,18 @@ import { MainButton } from "../../Components/Atoms/Form/Button/Button.styled";
 import { LoginLogo, LoginPage } from "./Login.styled";
 import { LoginTypes } from "./Login.types";
 import { useNavigate } from "react-router-dom";
-import { LoaderContext } from "../../Contexts/LoaderContext";
-import { SetLogin } from "../../Services/AuthService";
+import { LogIn } from "../../Services/AuthService";
 
 const Login = () => {
-  const loader = useContext(LoaderContext);
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm<LoginTypes>();
 
   const onSubmit = (data: LoginTypes) => {
-    loader.show(true);
-    SetLogin(
-      data,
-      () => {
-        navigate("/");
-        window.location.reload();
-      },
-      () => loader.show(false)
-    );
+    return LogIn(data, () => {
+      navigate("/");
+      window.location.reload();
+    });
   };
 
   return (

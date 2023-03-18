@@ -1,9 +1,9 @@
 import React from "react";
 import PageBody from "../../Hocs/PageBody/PageBody";
 import PageContent from "../../Hocs/PageContent/PageContent";
-import Section from "../../Components/Atoms/Section/Section";
 import ProjectsPingList from "../../Components/Atoms/ProjectsPingList/ProjectsPingList";
-import ActiveProgressProjectsList from "../../Components/Organism/ActiveProgressProjectsList/ActiveProgressProjectsList";
+import ActiveProjectsList from "../../Components/Organism/Project/ActiveProjectsList/ActiveProjectsList";
+import SettlementList from "../../Components/Organism/SettlementList/SettlementList";
 import { DashboardContainer } from "./Dashboard.styled";
 
 const Dashboard = () => {
@@ -11,12 +11,11 @@ const Dashboard = () => {
     <PageBody>
       <PageContent>
         <DashboardContainer>
-          <ActiveProgressProjectsList />
+          <ActiveProjectsList />
         </DashboardContainer>
         <DashboardContainer>
-          <Section title="Projekty offline">
-            <ProjectsPingList />
-          </Section>
+          <SettlementList />
+          <ProjectsPingList />
         </DashboardContainer>
       </PageContent>
     </PageBody>

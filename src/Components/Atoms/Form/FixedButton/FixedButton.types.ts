@@ -1,5 +1,5 @@
 export interface FixedButtonTypes {
-  type?: "save" | "new";
+  type?: "save" | "new" | "edit";
   callback?: Function;
   noBorder?: boolean;
 }

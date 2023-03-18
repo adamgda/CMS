@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "../../../Atoms/Grid/Grid";
 import MainInput from "../../../Atoms/Form/Input/Input";
 import TopBar from "../../../TopBar/TopBar";
@@ -7,9 +7,7 @@ import Modal from "../../../../Hocs/Modal/Modal";
 import FixedDeleteButton from "../../../Atoms/Form/FixedDeleteButton/FixedDeleteButton";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
 import { MainButton } from "../../../Atoms/Form/Button/Button.styled";
-import { GetUserData, IsAdmin } from "../../../../Services/AuthService";
 import { ProjectEditFormTypes } from "./ProjectEditForm.types";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
 import { useForm } from "react-hook-form";
 import {
   AddProject,
@@ -19,40 +17,44 @@ import {
 } from "../../../../Services/ProjectService";
 import {
   ElementData,
-  ProgressElement,
+  ElementFetchData,
 } from "../../../List/Element/Element.types";
 import { GetGroups } from "../../../../Services/GroupService";
 import { GroupListTypes } from "../../Group/GroupList/GroupList.types";
+import { IsAdmin, MyGroupId } from "../../../../Services/MeService";
+import {
+  ProjectProgressTypes,
+  ProjectResponseTypes,
+} from "../../../../Services/ProjectService.types";
 
-const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
-  const [groups, setGroups] = useState<Array<GroupListTypes>>([]);
-  const [projectData, setProjectData] = useState<ElementData | null>(null);
+const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
+  const [groups, setGroups] = useState<GroupListTypes[]>([]);
+  const [projectData, setProjectData] = useState<ElementData>();
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
     data: null,
     type: "",
   });
-  const loader = useContext(LoaderContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const getProjectData = () => {
+  const getProjectData = async () => {
     if (id) {
-      loader.show(true);
-      GetProjectDetails(
-        id,
-        (res: any) => setProjectData(res.data),
-        () => loader.show(false)
+      await GetProjectDetails(id, (res: ElementFetchData) =>
+        setProjectData(res.data)
       );
     }
   };
 
-  const progressStringListToArray = (data: string): Array<ProgressElement> => {
-    const progressArray: Array<ProgressElement> = [];
+  const progressStringListToArray = (data: string): ProjectProgressTypes[] => {
+    if (data === "") return [];
+
+    const progressArray: ProjectProgressTypes[] = [];
     const progressList = data.split("\n");
     const currentProgressList = projectData?.progress || [];
 
@@ -64,8 +66,8 @@ const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
 
       progressArray.push({
         label: elString,
-        id: currentEl ? currentEl.id : `${id}`,
-        done: currentEl ? currentEl.done : false,
+        id: currentEl?.id || `${id}`,
+        done: currentEl?.done || false,
       });
     });
     return progressArray;
@@ -78,36 +80,23 @@ const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
     return names.join("\r\n");
   };
 
-  const onSubmit = (data: ElementData) => {
+  const onSubmit = async (data: ProjectResponseTypes) => {
     if (data) {
-      loader.show(true);
       data.progress = progressStringListToArray(data.progress.toString());
-      data.groupId = IsAdmin() ? data.group_id : GetUserData().group_id;
+      data.group_id = IsAdmin ? data.group_id : MyGroupId;
 
       if (id) {
-        EditProjectDetails(
-          id,
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        await EditProjectDetails(id, data, () => callback());
       } else {
-        AddProject(
-          data,
-          () => finishCallback(),
-          () => loader.show(false)
-        );
+        await AddProject(data, () => callback());
       }
     }
   };
 
-  const onDelete = () => {
+  const onDelete = async () => {
     if (id) {
-      loader.show(true);
-      DeleteProject(id, () => {
+      await DeleteProject(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
-        finishCallback();
-        loader.show(false);
       });
     }
   };
@@ -116,18 +105,16 @@ const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
     setModalData({ show: true, data: null, type: "delete" });
   };
 
-  const getGroupsOptionsList = () => {
-    GetGroups(
-      (res: any) => {
-        const data: Array<GroupListTypes> = res?.data;
-        setGroups(data);
-      },
-      () => null
-    );
+  const getGroupsOptionsList = async () => {
+    await GetGroups((res: any) => {
+      const data: Array<GroupListTypes> = res?.data;
+      reset({ groupId: data[0].id.toString() });
+      setGroups(data);
+    });
   };
 
   useEffect(() => {
-    IsAdmin() && getGroupsOptionsList();
+    IsAdmin && getGroupsOptionsList();
     getProjectData();
   }, [id]);
 
@@ -159,14 +146,9 @@ const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
             </MainInput>
           </Grid>
           <Grid padding={"0 0 1rem"}>
-            <MainInput
-              label="Dostępy projektu"
-              required
-              isError={errors?.description}
-            >
+            <MainInput label="Dostępy projektu" isError={errors?.description}>
               <textarea
                 {...register("description", {
-                  required: true,
                   value: projectData?.description,
                 })}
               />
@@ -181,7 +163,7 @@ const ProjectEditForm = ({ id, finishCallback }: ProjectEditFormTypes) => {
               />
             </MainInput>
           </Grid>
-          {IsAdmin() && (
+          {IsAdmin && (
             <Grid padding={"0 0 .25rem"}>
               <MainInput label="Grupa">
                 <select

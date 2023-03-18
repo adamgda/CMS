@@ -1,45 +1,40 @@
-import { GetApi, PutApi, DeleteApi, PostApi } from "./ApiService";
+import { Get, Put, Delete, Post } from "./ApiService";
+import { IsAdmin } from "./MeService";
+import { AxiosResponse } from "axios";
+import { ProjectResponseTypes } from "./ProjectService.types";
 
-export const GetAllProjects = (
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return GetApi("/project/all", callback, finallyCallback);
-};
-
-export const GetProjectsByGroup = (
-  id: number,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return GetApi(`/project/group/${id}`, callback, finallyCallback);
+export const GetProjects = (
+  callback: Function
+): Promise<AxiosResponse<ProjectResponseTypes[]> | void> => {
+  const url = IsAdmin ? "/project/all" : "/project";
+  return Get(url, callback);
 };
 
 export const GetProjectDetails = (
   id: number,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return GetApi(`/project/${id}`, callback, finallyCallback);
+  callback: Function
+): Promise<AxiosResponse<ProjectResponseTypes> | void> => {
+  return Get(`/project/${id}`, callback);
 };
 
 export const EditProjectDetails = (
   id: number,
-  data: any,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return PutApi(`/project/${id}`, data, callback, finallyCallback);
+  data: ProjectResponseTypes,
+  callback: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Put(`/project/${id}`, data, callback);
 };
 
 export const AddProject = (
-  data: any,
-  callback: Function,
-  finallyCallback: Function
-) => {
-  return PostApi(`/project`, data, callback, finallyCallback);
+  data: ProjectResponseTypes,
+  callback: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Post(`/project`, data, callback);
 };
 
-export const DeleteProject = (id: number, finallyCallback: Function) => {
-  return DeleteApi(`/project/${id}`, finallyCallback);
+export const DeleteProject = (
+  id: number,
+  callback: Function
+): Promise<AxiosResponse<any> | void> => {
+  return Delete(`/project/${id}`, callback);
 };

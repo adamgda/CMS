@@ -20,6 +20,7 @@ export const SectionContainer = styled.div`
   table {
     border-spacing: 0;
     width: 100%;
+    margin-bottom: 20px;
 
     td {
       padding: 1rem;

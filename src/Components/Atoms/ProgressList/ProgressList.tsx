@@ -1,56 +1,57 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
+import CheckBoxOutlineBlankTwoToneIcon from "@mui/icons-material/CheckBoxOutlineBlankTwoTone";
+import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
+import { ProgressListTypes } from "./ProgressList.types";
+import { numberWithCommas } from "../../../Helpers/StringHelpers";
 import {
   ProgressListContainer,
   ProgressListElement,
 } from "./ProgressList.styled";
-import CheckBoxOutlineBlankTwoToneIcon from "@mui/icons-material/CheckBoxOutlineBlankTwoTone";
-import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
-import { ProgressListTypes } from "./ProgressList.types";
-import { EditProjectDetails } from "../../../Services/ProjectService";
-import { LoaderContext } from "../../../Contexts/LoaderContext";
 
-const ProgressList = ({ projectData }: ProgressListTypes): JSX.Element => {
-  const loader = useContext(LoaderContext);
+const ProgressList = ({
+  list,
+  editCallback,
+}: ProgressListTypes): JSX.Element => {
+  const [, setProjectProgress] = useState(0);
 
-  const changeProgressState = (id: string) => {
-    if (projectData) {
-      loader.show(true);
-
-      const data = projectData;
-      const progressIndex = data?.progress.findIndex((el) => el.id === id);
+  const changeProgressState = (id: string): void => {
+    if (list) {
+      const progressIndex = list?.findIndex((el) => el.id === id);
 
       if (progressIndex !== -1) {
-        const progressEl = data.progress[progressIndex];
+        const progressEl = list[progressIndex];
 
         progressEl.done = !progressEl.done;
-
-        EditProjectDetails(
-          projectData?.id,
-          data,
-          () => null,
-          () => loader.show(false)
-        );
+        editCallback(list);
+        setProjectProgress(list.filter((el) => el.done).length);
       }
     }
   };
 
-  return (
+  return list?.length > 0 ? (
     <ProgressListContainer>
-      {projectData?.progress?.map((el) => (
-        <ProgressListElement
-          key={el.id}
-          className={el.done ? "done" : ""}
-          onClick={() => changeProgressState(el.id)}
-        >
-          {el.done ? (
-            <CheckBoxTwoToneIcon />
-          ) : (
-            <CheckBoxOutlineBlankTwoToneIcon />
-          )}
-          <span>{el.label}</span>
-        </ProgressListElement>
-      ))}
+      <div>
+        {list?.map((el) => (
+          <ProgressListElement
+            key={el.id}
+            className={el.done ? "done" : "progress"}
+            onClick={() => changeProgressState(el.id)}
+          >
+            {el.done ? (
+              <CheckBoxTwoToneIcon />
+            ) : (
+              <CheckBoxOutlineBlankTwoToneIcon />
+            )}
+            <span>{el.label}</span>
+            {el.sum && (
+              <span className="sum">{numberWithCommas(el.sum)} zł</span>
+            )}
+          </ProgressListElement>
+        ))}
+      </div>
     </ProgressListContainer>
+  ) : (
+    <></>
   );
 };
 

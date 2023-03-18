@@ -3,8 +3,9 @@ import { ElementTasksInfoTypes } from "./Components/ElementTasks/Info/ElementTas
 
 export interface ProgressElement {
   id: string;
-  done: boolean;
+  done?: boolean;
   label: string;
+  sum?: string;
 }
 
 export interface ElementTypes extends ElementTitleTypes, ElementTasksInfoTypes {
@@ -24,6 +25,10 @@ export interface ElementData {
   progress: Array<ProgressElement>;
   link: string;
   description: string;
-  groupId: string;
+  groupId: number;
   group_id?: string;
+}
+
+export interface ElementFetchData {
+  data: ElementData;
 }

@@ -7,7 +7,7 @@ export const LoginPage = styled.div`
   height: 100vh;
 
   & > div {
-    padding-top: 120px;
+    padding-top: 7.5rem;
   }
 `;
 

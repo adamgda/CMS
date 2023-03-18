@@ -2,9 +2,9 @@ import React from "react";
 import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
 import FolderTwoToneIcon from "@mui/icons-material/FolderTwoTone";
 import CreateNewFolderTwoToneIcon from "@mui/icons-material/CreateNewFolderTwoTone";
-import { IsEditor } from "../../../Services/AuthService";
 import { MenuContainer } from "./Menu.styled";
 import { NavLink } from "react-router-dom";
+import { IsEditor } from "../../../Services/MeService";
 
 const Menu = () => {
   return (
@@ -20,7 +20,7 @@ const Menu = () => {
             Projekty <FolderTwoToneIcon />
           </NavLink>
         </li>
-        {IsEditor() && (
+        {IsEditor && (
           <li>
             <NavLink to="/new-project">
               Nowy projekt <CreateNewFolderTwoToneIcon />

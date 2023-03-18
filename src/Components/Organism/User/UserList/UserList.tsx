@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Section from "../../../Atoms/Section/Section";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import UserEditForm from "../UserEditForm/UserEditForm";
 import Modal from "../../../../Hocs/Modal/Modal";
 import { GetUsers } from "../../../../Services/UserService";
-import { LoaderContext } from "../../../../Contexts/LoaderContext";
 import { UserListTypes } from "./UserList.types";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
-import { MainButton } from "../../../Atoms/Form/Button/Button.styled";
+import { SimpleButton } from "../../../Atoms/Form/Button/Button.styled";
 
 const UserList = () => {
   const [users, setUsers] = useState<Array<UserListTypes>>([]);
@@ -17,16 +16,10 @@ const UserList = () => {
     type: "userEdit",
   });
 
-  const loader = useContext(LoaderContext);
-
-  const getUsers = () => {
-    loader.show(true);
-    GetUsers(
-      (res: any) => {
-        setUsers(res?.data);
-      },
-      () => loader.show(false)
-    );
+  const getUsers = async () => {
+    await GetUsers((res: any) => {
+      setUsers(res?.data);
+    });
   };
 
   const closeModal = (): void => {
@@ -37,9 +30,9 @@ const UserList = () => {
     setModalData({ show: true, data: id, type: type });
   };
 
-  const finishCallback = () => {
+  const callback = async () => {
+    await getUsers();
     closeModal();
-    getUsers();
   };
 
   useEffect(() => {
@@ -59,20 +52,18 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => {
-              return (
-                <tr key={user.id}>
-                  <td>{user.login}</td>
-                  <td>{user.email}</td>
-                  <td>{user.group_id}</td>
-                  <td className="auto">
-                    <a onClick={() => showModal(user.id, "edit")}>
-                      <EditTwoToneIcon />
-                    </a>
-                  </td>
-                </tr>
-              );
-            })}
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.login}</td>
+                <td>{user.email}</td>
+                <td>{user.group_id}</td>
+                <td className="auto">
+                  <a onClick={() => showModal(user.id, "edit")}>
+                    <EditTwoToneIcon />
+                  </a>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         {modalData?.show && (
@@ -81,19 +72,12 @@ const UserList = () => {
             closeCallback={closeModal}
             padding={"1rem 2rem 2rem"}
           >
-            <UserEditForm
-              id={modalData?.data}
-              finishCallback={finishCallback}
-            />
+            <UserEditForm id={modalData?.data} callback={callback} />
           </Modal>
         )}
-        <MainButton
-          type="submit"
-          onClick={() => showModal(null, "add")}
-          style={{ maxWidth: "200px", marginBottom: "0" }}
-        >
+        <SimpleButton type="submit" onClick={() => showModal(null, "add")}>
           <span>Nowy użytkownik</span>
-        </MainButton>
+        </SimpleButton>
       </>
     </Section>
   );

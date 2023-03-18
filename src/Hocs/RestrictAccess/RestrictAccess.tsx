@@ -1,10 +1,10 @@
 import React from "react";
-import { IsAdmin } from "../../Services/AuthService";
 import { RestrictAccessTypes } from "./RestrictAccess.types";
 import { RestrictAccessContainer } from "./RestrictAccess.styled";
+import { IsAdmin } from "../../Services/MeService";
 
 const RestrictAccess = ({ children }: RestrictAccessTypes) => {
-  return IsAdmin() ? (
+  return IsAdmin ? (
     <>{children}</>
   ) : (
     <RestrictAccessContainer>
