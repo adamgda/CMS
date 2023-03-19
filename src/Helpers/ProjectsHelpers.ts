@@ -1,4 +1,4 @@
-import { ElementData } from "../Components/List/Element/Element.types";
+import { ElementData } from "../Components/Molecules/Element/Element.types";
 
 export const FilterByActiveProgress = (
   list: Array<ElementData>

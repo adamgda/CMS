@@ -14,5 +14,5 @@ export interface ToastrData {
 }
 
 export interface LoaderData {
-  show: Function;
+  show: () => void;
 }

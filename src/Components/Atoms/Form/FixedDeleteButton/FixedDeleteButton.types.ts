@@ -1,3 +1,3 @@
 export interface FixedDeleteButtonTypes {
-  callback?: Function;
+  callback?: () => void;
 }

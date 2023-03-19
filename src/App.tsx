@@ -1,10 +1,10 @@
 import React from "react";
-import Login from "./Layouts/Login/Login";
-import Dashboard from "./Layouts/Dashboard/Dashboard";
-import Projects from "./Layouts/Projects/Projects";
-import NewProject from "./Layouts/NewProject/NewProject";
-import Settings from "./Layouts/Settings/Settings";
-import SingleProject from "./Layouts/SingleProject/SingleProject";
+import Login from "./Components/Organisms/Login/Login";
+import Dashboard from "./Components/Organisms/Dashboard/Dashboard";
+import Projects from "./Components/Organisms/Projects/Projects";
+import NewProject from "./Components/Organisms/NewProject/NewProject";
+import Settings from "./Components/Organisms/Settings/Settings";
+import SingleProject from "./Components/Organisms/SingleProject/SingleProject";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoaderContainer } from "./Hocs/Loader/LoaderContainer";
 import { ToastrContextProvider } from "./Contexts/ToastrContext";

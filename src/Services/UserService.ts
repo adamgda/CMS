@@ -1,6 +1,7 @@
 import { Delete, Get, Post, Patch } from "./ApiService";
 import { AxiosResponse } from "axios";
 import { UserResponseTypes } from "./UserService.types";
+import { UserFormTypes } from "../Components/Molecules/User/UserList/UserList.types";
 
 export const GetUsers = (
   callback: Function
@@ -19,14 +20,14 @@ export const GetUserDetails = (
 
 export const EditUserDetails = (
   id: number,
-  data: UserResponseTypes,
+  data: UserResponseTypes | UserFormTypes,
   callback: Function
 ): Promise<AxiosResponse<UserResponseTypes> | void> => {
   return Patch(`/user/${id}`, data, callback);
 };
 
 export const AddUser = (
-  data: UserResponseTypes,
+  data: UserResponseTypes | UserFormTypes,
   callback: Function
 ): Promise<AxiosResponse<any> | void> => {
   return Post(`/user`, data, callback);

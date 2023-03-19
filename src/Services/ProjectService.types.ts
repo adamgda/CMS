@@ -9,6 +9,6 @@ export interface ProjectResponseTypes {
   name: string;
   description: string;
   link: string;
-  group_id: number;
+  groupId: string;
   progress: ProjectProgressTypes[];
 }

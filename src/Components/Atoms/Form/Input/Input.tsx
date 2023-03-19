@@ -1,8 +1,8 @@
 import React from "react";
-import { MainInputContainer } from "./Input.styles";
-import { InputTypes } from "./Input.types";
 import ErrorTwoToneIcon from "@mui/icons-material/ErrorTwoTone";
 import Tooltip from "@mui/material/Tooltip";
+import { MainInputContainer } from "./Input.styles";
+import { InputTypes } from "./Input.types";
 
 const MainInput = ({
   label,

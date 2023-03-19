@@ -1,4 +1,4 @@
-import { ProgressElement } from "../../List/Element/Element.types";
+import { ProgressElement } from "../../Molecules/Element/Element.types";
 
 export interface ProjectHeaderTypes {
   name: string;

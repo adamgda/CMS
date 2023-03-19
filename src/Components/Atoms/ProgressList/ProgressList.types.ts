@@ -1,6 +1,7 @@
-import { ProgressElement } from "../../List/Element/Element.types";
+import { ProjectProgressTypes } from "../../../Services/ProjectService.types";
 
 export interface ProgressListTypes {
-  list: Array<ProgressElement>;
-  editCallback: Function;
+  list: ProjectProgressTypes[];
+  editCallback?: (updatedList: ProjectProgressTypes[]) => void;
+  deleteCallback?: (id: string) => void;
 }

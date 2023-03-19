@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ModalTypes } from "./Modal.types";
 import { ModalContainer, ModalBox, ModalContent } from "./Modal.styles";
-import CloseIcon from "../../Components/Atoms/Ui/CloseIcon/CloseIcon";
+import CloseIcon from "../../Components/Atoms/CloseIcon/CloseIcon";
 
 const Modal = ({
   children,

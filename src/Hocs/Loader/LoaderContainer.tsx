@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { LoadingScreen } from "../../Components/LoadingScreen/LoadingScreen";
+import { Loader } from "../../Components/Atoms/Loader/Loader";
 import { LoaderContainerTypes } from "./LoaderContainer.types";
 
 export const LoaderContainer = ({
@@ -33,7 +33,7 @@ export const LoaderContainer = ({
   return (
     <>
       <div className={`pageBody ${showState ? "loading" : ""}`}>{children}</div>
-      {showState && <LoadingScreen />}
+      {showState && <Loader />}
     </>
   );
 };

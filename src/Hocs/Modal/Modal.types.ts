@@ -10,7 +10,7 @@ export interface ModalStyledTypes {
 export interface ModalTypes extends ModalStyledTypes {
   size?: "standard" | "big" | "small";
   children: ReactNode;
-  closeCallback?: Function;
+  closeCallback?: () => void;
 }
 
 export interface ModalDataTypes {

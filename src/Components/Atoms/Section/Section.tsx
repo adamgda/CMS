@@ -1,6 +1,6 @@
 import React from "react";
-import ElementTitle from "../../List/Element/Components/ElementTitle/ElementTitle";
-import { ElementContainer } from "../../List/Element/Element.styled";
+import ElementTitle from "../../Molecules/Element/Components/ElementTitle/ElementTitle";
+import { ElementContainer } from "../../Molecules/Element/Element.styled";
 import { SectionTypes } from "./Section.types";
 import { SectionContainer } from "./Section.styles";
 

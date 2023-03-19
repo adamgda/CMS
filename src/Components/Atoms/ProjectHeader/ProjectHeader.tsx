@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
+import ProgressBar from "../../Molecules/ProgressBar/ProgressBar";
 import { ProjectHeaderTypes } from "./ProjectHeader.types";
 import { ProjectHeaderContainer } from "./ProjectHeader.styled";
-import ProgressBar from "../ProgressBar/ProgressBar";
 
-const ProjectHeader = ({ name, url, progress }: ProjectHeaderTypes) => {
+const ProjectHeader = ({
+  name,
+  url,
+  progress,
+}: ProjectHeaderTypes): JSX.Element => {
   return (
     <ProjectHeaderContainer>
       <div>
