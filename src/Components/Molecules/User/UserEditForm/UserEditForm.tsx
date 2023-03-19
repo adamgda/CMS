@@ -19,8 +19,8 @@ import {
 import { GroupListTypes } from "../../Group/GroupList/GroupList.types";
 import { GetGroups } from "../../../../Services/GroupService";
 
-const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
-  const [, setGroups] = useState<Array<GroupListTypes>>([]);
+const UserEditForm = ({ id, callback }: UserEditFormTypes): JSX.Element => {
+  const [, setGroups] = useState<GroupListTypes[]>([]);
   const [userData, setUserData] = useState<UserFormTypes | null>(null);
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
@@ -32,15 +32,15 @@ const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<UserFormTypes>();
 
-  const getUserData = async () => {
+  const getUserData = async (): Promise<void> => {
     if (id) {
       await GetUserDetails(id, (data: UserFormTypes) => setUserData(data));
     }
   };
 
-  const onSubmit = async (data: UserFormTypes) => {
+  const onSubmit = async (data: UserFormTypes): Promise<void> => {
     if (data) {
       if (id) {
         await EditUserDetails(id, data, () => callback());
@@ -50,7 +50,7 @@ const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
     }
   };
 
-  const onDelete = async () => {
+  const onDelete = async (): Promise<void> => {
     if (id) {
       await DeleteUser(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
@@ -59,11 +59,11 @@ const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
     }
   };
 
-  const showDelete = () => {
+  const showDelete = (): void => {
     setModalData({ show: true, data: null, type: "delete" });
   };
 
-  const getGroupsOptionsList = async () => {
+  const getGroupsOptionsList = async (): Promise<void> => {
     await GetGroups((res: any) => {
       const data: Array<GroupListTypes> = res?.data;
       setGroups(data);
@@ -102,7 +102,7 @@ const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
               label={`Hasło użytkownika (sugestia: ${Math.random()
                 .toString(36)
                 .slice(2, 14)})`}
-              isError={errors?.name}
+              isError={errors?.password}
             >
               <input
                 type="text"
@@ -130,7 +130,7 @@ const UserEditForm = ({ id, callback }: UserEditFormTypes) => {
               <MainInput
                 label="Grupa użytkownika (ID)"
                 required
-                isError={errors?.name}
+                isError={errors?.groupId}
               >
                 <input
                   type="text"

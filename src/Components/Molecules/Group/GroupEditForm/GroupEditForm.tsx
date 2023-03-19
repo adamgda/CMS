@@ -30,7 +30,7 @@ const GroupEditForm = ({ id, callback }: GroupEditFormTypes) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<GroupResponseTypes>();
 
   const getGroupData = () => {
     if (id) {
@@ -75,7 +75,7 @@ const GroupEditForm = ({ id, callback }: GroupEditFormTypes) => {
             <TopBar title="Nowa grupa" margin="0" />
           )}
           <Grid padding={"0 0 1rem"}>
-            <MainInput label="Nazwa grupy" required isError={errors?.login}>
+            <MainInput label="Nazwa grupy" required isError={errors?.name}>
               <input
                 type="text"
                 {...register("name", {

@@ -10,4 +10,5 @@ export interface UserFormTypes {
   email: string;
   password: string;
   group_id: number;
+  groupId?: number;
 }

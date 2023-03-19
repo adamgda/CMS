@@ -25,7 +25,7 @@ const ActiveProjectsList = () => {
     <ActiveProgressProjectsListContainer>
       {inProgressProjects?.map((project) => (
         <Section title="Projekt w trakcie" key={project.id}>
-          <ProjectFullElement id={project.id} />
+          <ProjectFullElement id={project.id || 0} />
         </Section>
       ))}
     </ActiveProgressProjectsListContainer>

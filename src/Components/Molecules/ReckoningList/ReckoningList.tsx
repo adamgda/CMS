@@ -57,12 +57,12 @@ const ReckoningList = (): JSX.Element => {
     DeleteAllReckoning(() => reckoningModalClose());
   };
 
-  const reckoningSum = (): string => {
+  const reckoningSum = (): number => {
     let sum = 0;
     reckonings.forEach((el) => {
       sum = sum + el.cost;
     });
-    return sum.toString();
+    return sum;
   };
 
   useEffect(() => {

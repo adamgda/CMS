@@ -5,7 +5,7 @@ export interface ProjectProgressTypes {
 }
 
 export interface ProjectResponseTypes {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   link: string;

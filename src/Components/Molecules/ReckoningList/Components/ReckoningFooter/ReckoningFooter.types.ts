@@ -1,4 +1,4 @@
 export interface ReckoningFooterTypes {
-  sum: string;
+  sum: number;
   deleteAll: () => void;
 }

@@ -6,8 +6,8 @@ import { ResponseTypes } from "./ApiService.types";
 const Catch = (res: ResponseTypes) => {
   toast.error(res?.response?.data?.message);
   res?.response?.status === 401 &&
-    window.location.pathname !== "/login" &&
-    window.location.replace("/login");
+    window.location.pathname !== "/#/login" &&
+    window.location.replace("/#/login");
 };
 
 export const Post = (

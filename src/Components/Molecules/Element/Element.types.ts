@@ -9,8 +9,7 @@ export interface ProgressElement {
 
 export interface ElementTypes extends ElementTitleTypes, ElementTasksInfoTypes {
   showDetailsCallback: () => void;
-  showEditCallback: () => void;
-  progress: Array<ProgressElement>;
+  progress: ProgressElement[];
   link: string;
 }
 
@@ -19,12 +18,12 @@ export interface ElementStyledTypes {
 }
 
 export interface ElementData {
-  id: number;
+  id?: number;
   name: string;
-  progress: Array<ProgressElement>;
+  progress: ProgressElement[];
   link: string;
   description: string;
-  groupId: number;
+  groupId: string;
   group_id?: string;
 }
 

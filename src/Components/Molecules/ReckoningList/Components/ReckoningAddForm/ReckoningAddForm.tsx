@@ -8,17 +8,15 @@ import { useForm } from "react-hook-form";
 import { ReckoningTypes } from "../../ReckoningList.types";
 
 const ReckoningAddForm = ({ addCallback }: ReckoningAddFormTypes) => {
-  const [reckoningtData, setReckoningtDataData] =
-    useState<ReckoningTypes | null>(null);
+  const [reckoningData] = useState<ReckoningTypes | null>(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<ReckoningTypes>();
 
-  const onSubmit = async (data: ReckoningTypes) => {
-    console.log(data);
+  const onSubmit = async (data: ReckoningTypes): Promise<void> => {
     data && addCallback && addCallback(data);
   };
 
@@ -31,7 +29,7 @@ const ReckoningAddForm = ({ addCallback }: ReckoningAddFormTypes) => {
             type="text"
             {...register("name", {
               required: true,
-              value: reckoningtData?.name,
+              value: reckoningData?.name,
             })}
           />
         </MainInput>
@@ -40,7 +38,7 @@ const ReckoningAddForm = ({ addCallback }: ReckoningAddFormTypes) => {
             type="number"
             {...register("cost", {
               required: true,
-              value: reckoningtData?.cost,
+              value: reckoningData?.cost,
             })}
           />
         </MainInput>

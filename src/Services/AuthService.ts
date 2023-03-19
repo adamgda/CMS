@@ -27,5 +27,5 @@ export const LogIn = (
 export const LogOut = () => {
   sessionStorage.removeItem("token");
   sessionStorage.removeItem("user");
-  window.location.replace("/login");
+  window.location.replace("/#/login");
 };

@@ -5,7 +5,7 @@ import Projects from "./Components/Organisms/Projects/Projects";
 import NewProject from "./Components/Organisms/NewProject/NewProject";
 import Settings from "./Components/Organisms/Settings/Settings";
 import SingleProject from "./Components/Organisms/SingleProject/SingleProject";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { LoaderContainer } from "./Hocs/Loader/LoaderContainer";
 import { ToastrContextProvider } from "./Contexts/ToastrContext";
 import { ModalContextProvider } from "./Contexts/ModalContext";
@@ -17,7 +17,7 @@ const App = () => {
       <LoaderContainer>
         <ModalContextProvider>
           <ToastrContextProvider>
-            <BrowserRouter>
+            <HashRouter>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/projects" element={<Projects />} />
@@ -26,7 +26,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
-            </BrowserRouter>
+            </HashRouter>
           </ToastrContextProvider>
         </ModalContextProvider>
       </LoaderContainer>

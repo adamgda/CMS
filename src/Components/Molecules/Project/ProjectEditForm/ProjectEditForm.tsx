@@ -24,7 +24,10 @@ import {
   ProjectResponseTypes,
 } from "../../../../Services/ProjectService.types";
 
-const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
+const ProjectEditForm = ({
+  id,
+  callback,
+}: ProjectEditFormTypes): JSX.Element => {
   const [groups, setGroups] = useState<GroupListTypes[]>([]);
   const [projectData, setProjectData] = useState<ElementData>();
   const [modalData, setModalData] = useState<ModalDataTypes>({
@@ -38,9 +41,9 @@ const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<ProjectResponseTypes>();
 
-  const getProjectData = async () => {
+  const getProjectData = async (): Promise<void> => {
     if (id) {
       await GetProjectDetails(id, (res: ElementFetchData) =>
         setProjectData(res.data)
@@ -71,13 +74,13 @@ const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
   };
 
   const progressArrayToStringList = (): string => {
-    const names: Array<string> = [];
+    const names: string[] = [];
 
     projectData?.progress?.forEach((progress) => names.push(progress.label));
     return names.join("\r\n");
   };
 
-  const onSubmit = async (data: ProjectResponseTypes) => {
+  const onSubmit = async (data: ProjectResponseTypes): Promise<void> => {
     if (data) {
       data.progress = progressStringListToArray(data.progress.toString());
 
@@ -89,7 +92,7 @@ const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
     }
   };
 
-  const onDelete = async () => {
+  const onDelete = async (): Promise<void> => {
     if (id) {
       await DeleteProject(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
@@ -97,11 +100,11 @@ const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
     }
   };
 
-  const showDelete = () => {
+  const showDelete = (): void => {
     setModalData({ show: true, data: null, type: "delete" });
   };
 
-  const getGroupsOptionsList = async () => {
+  const getGroupsOptionsList = async (): Promise<void> => {
     await GetGroups((res: any) => {
       const data: Array<GroupListTypes> = res?.data;
       reset({ groupId: data[0].id.toString() });
@@ -159,6 +162,7 @@ const ProjectEditForm = ({ id, callback }: ProjectEditFormTypes) => {
             <MainInput label="Lista modułów (oddzielone enterem)">
               <textarea
                 {...register("progress", {
+                  // @ts-ignore
                   value: progressArrayToStringList(),
                 })}
               />

@@ -32,7 +32,7 @@ const Projects = () => {
   };
 
   const goToProjectDetailsPage = (id: number): void => {
-    navigate(`/projects/${id}`);
+    id && navigate(`/projects/${id}`);
   };
 
   const getProjects = async (): Promise<void> => {
@@ -59,8 +59,9 @@ const Projects = () => {
                 title={project?.name}
                 progress={project?.progress}
                 link={project?.link}
-                showDetailsCallback={() => goToProjectDetailsPage(project?.id)}
-                showEditCallback={() => console.log(project?.id, "edit")}
+                showDetailsCallback={() =>
+                  project?.id && goToProjectDetailsPage(project?.id)
+                }
               />
             );
           })}
