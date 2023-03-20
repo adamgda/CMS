@@ -1,10 +1,10 @@
 import React from "react";
-import { NavBarContainer, NavBarLogo } from "./NavBar.styles";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
 import UserBar from "../UserBar/UserBar";
+import { NavBarContainer, NavBarLogo } from "./NavBar.styles";
 
-const NavBar = () => {
+const NavBar = (): JSX.Element => {
   return (
     <NavBarContainer>
       <div>

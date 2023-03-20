@@ -6,7 +6,7 @@ import GroupList from "../../Molecules/Group/GroupList/GroupList";
 import RestrictAccess from "../../../Hocs/RestrictAccess/RestrictAccess";
 import { DashboardContainer } from "../Dashboard/Dashboard.styled";
 
-const Settings = () => {
+const Settings = (): JSX.Element => {
   return (
     <RestrictAccess>
       <PageBody>

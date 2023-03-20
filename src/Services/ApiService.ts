@@ -3,11 +3,34 @@ import { API_URL } from "../App.config";
 import { toast } from "react-toastify";
 import { ResponseTypes } from "./ApiService.types";
 
-const Catch = (res: ResponseTypes) => {
+const isNotLoginPage = window.location.pathname !== "/#/login";
+
+export const backToLogin = (): void => {
+  window.location.replace("/#/login");
+  sessionStorage.removeItem("user");
+};
+
+axios.interceptors.request.use(
+  (config) => {
+    if (
+      !sessionStorage.getItem("token") &&
+      isNotLoginPage &&
+      config.method === "get"
+    ) {
+      backToLogin();
+      Promise.reject();
+    } else {
+      return config;
+    }
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+const Catch = (res: ResponseTypes): void => {
   toast.error(res?.response?.data?.message);
-  res?.response?.status === 401 &&
-    window.location.pathname !== "/#/login" &&
-    window.location.replace("/#/login");
+  res?.response?.status === 401 && backToLogin();
 };
 
 export const Post = (

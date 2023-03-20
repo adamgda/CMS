@@ -1,4 +1,4 @@
-import { Post } from "./ApiService";
+import { backToLogin, Post } from "./ApiService";
 import { AxiosResponse } from "axios";
 import { LoginResponseTypes } from "./AuthService.types";
 
@@ -27,5 +27,5 @@ export const LogIn = (
 export const LogOut = () => {
   sessionStorage.removeItem("token");
   sessionStorage.removeItem("user");
-  window.location.replace("/#/login");
+  backToLogin();
 };

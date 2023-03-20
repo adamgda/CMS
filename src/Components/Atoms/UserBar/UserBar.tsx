@@ -6,7 +6,7 @@ import { LogOut } from "../../../Services/AuthService";
 import { NavLink } from "react-router-dom";
 import { IsAdmin, MyLogin } from "../../../Services/MeService";
 
-const UserBar = () => {
+const UserBar = (): JSX.Element => {
   return (
     <UserBarContainer>
       <div>{MyLogin || "---"}</div>

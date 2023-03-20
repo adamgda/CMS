@@ -1,7 +1,7 @@
 import React from "react";
 import { LoaderSvgContainer } from "./Loader.styled";
 
-export const Loader = () => {
+export const Loader = (): JSX.Element => {
   return (
     <LoaderSvgContainer>
       <div className="hero-container">

@@ -16,7 +16,7 @@ const UserList = () => {
     type: "userEdit",
   });
 
-  const getUsers = async () => {
+  const getUsers = async (): Promise<void> => {
     await GetUsers((res: any) => {
       setUsers(res?.data);
     });
@@ -30,7 +30,7 @@ const UserList = () => {
     setModalData({ show: true, data: id, type: type });
   };
 
-  const callback = async () => {
+  const callback = async (): Promise<void> => {
     await getUsers();
     closeModal();
   };

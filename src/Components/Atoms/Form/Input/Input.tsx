@@ -10,7 +10,7 @@ const MainInput = ({
   small = false,
   required = false,
   isError = false,
-}: InputTypes) => {
+}: InputTypes): JSX.Element => {
   return (
     <MainInputContainer small={small}>
       {label && <span className={required ? "required" : ""}>{label}</span>}

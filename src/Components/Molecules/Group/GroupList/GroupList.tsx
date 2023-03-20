@@ -8,7 +8,7 @@ import { GroupListTypes } from "./GroupList.types";
 import { ModalDataTypes } from "../../../../Hocs/Modal/Modal.types";
 import { SimpleButton } from "../../../Atoms/Form/Button/Button.styled";
 
-const UserList = () => {
+const UserList = (): JSX.Element => {
   const [groups, setGroups] = useState<Array<GroupListTypes>>([]);
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
@@ -16,7 +16,7 @@ const UserList = () => {
     type: "groupEdit",
   });
 
-  const getGroups = () => {
+  const getGroups = (): void => {
     GetGroups((res: any) => {
       setGroups(res?.data);
     });
@@ -30,7 +30,7 @@ const UserList = () => {
     setModalData({ show: true, data: id, type: type });
   };
 
-  const callback = () => {
+  const callback = (): void => {
     closeModal();
     getGroups();
   };

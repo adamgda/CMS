@@ -1,8 +1,8 @@
 import React from "react";
-import { ElementContainer } from "./Element.styled";
-import { ElementTypes } from "./Element.types";
 import ElementTitle from "./Components/ElementTitle/ElementTitle";
 import ElementTasksInfo from "./Components/ElementTasks/Info/ElementTasksInfo";
+import { ElementContainer } from "./Element.styled";
+import { ElementTypes } from "./Element.types";
 
 const Element = ({
   title,

@@ -10,13 +10,13 @@ import { LoginTypes } from "./Login.types";
 import { useNavigate } from "react-router-dom";
 import { LogIn } from "../../../Services/AuthService";
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm<LoginTypes>();
 
-  const onSubmit = (data: LoginTypes) => {
-    return LogIn(data, () => {
+  const onSubmit = (data: LoginTypes): void => {
+    LogIn(data, () => {
       navigate("/");
       window.location.reload();
     });

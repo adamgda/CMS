@@ -18,7 +18,7 @@ import {
 } from "../../../../Services/GroupService";
 import { GroupResponseTypes } from "../../../../Services/GroupService.types";
 
-const GroupEditForm = ({ id, callback }: GroupEditFormTypes) => {
+const GroupEditForm = ({ id, callback }: GroupEditFormTypes): JSX.Element => {
   const [groupData, setGroupData] = useState<GroupResponseTypes>();
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
@@ -32,32 +32,32 @@ const GroupEditForm = ({ id, callback }: GroupEditFormTypes) => {
     formState: { errors },
   } = useForm<GroupResponseTypes>();
 
-  const getGroupData = () => {
+  const getGroupData = (): void => {
     if (id) {
       GetGroupDetails(id, (data: GroupResponseTypes) => setGroupData(data));
     }
   };
 
-  const onSubmit = (data: GroupResponseTypes) => {
+  const onSubmit = (data: GroupResponseTypes): void => {
     if (data) {
       if (id) {
-        return EditGroupDetails({ id: data.id, ...data }, () => callback());
+        EditGroupDetails({ id: data.id, ...data }, () => callback());
       } else {
-        return AddGroup(data, () => callback());
+        AddGroup(data, () => callback());
       }
     }
   };
 
-  const onDelete = () => {
+  const onDelete = (): void => {
     if (id) {
-      return DeleteGroup(id, () => {
+      DeleteGroup(id, () => {
         setModalData({ show: false, data: null, type: "delete" });
         callback();
       });
     }
   };
 
-  const showDelete = () => {
+  const showDelete = (): void => {
     setModalData({ show: true, data: null, type: "delete" });
   };
 

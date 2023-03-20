@@ -9,7 +9,7 @@ const FixedButton = ({
   type = "save",
   callback,
   noBorder = false,
-}: FixedButtonTypes) => {
+}: FixedButtonTypes): JSX.Element => {
   const isSaveButton = type === "save";
 
   const triggerCallback = (e: React.SyntheticEvent): void => {

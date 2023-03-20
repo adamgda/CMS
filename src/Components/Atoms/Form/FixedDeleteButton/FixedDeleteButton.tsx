@@ -1,9 +1,11 @@
 import React from "react";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import { FixedDeleteButtonTypes } from "./FixedDeleteButton.types";
 import { FixedButtonContainer } from "./FixedDeleteButton.styled";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 
-const FixedDeleteButton = ({ callback }: FixedDeleteButtonTypes) => {
+const FixedDeleteButton = ({
+  callback,
+}: FixedDeleteButtonTypes): JSX.Element => {
   const triggerCallback = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     callback && callback();

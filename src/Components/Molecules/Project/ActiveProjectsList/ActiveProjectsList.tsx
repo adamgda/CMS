@@ -6,12 +6,12 @@ import { FilterByActiveProgress } from "../../../../Helpers/ProjectsHelpers";
 import { ActiveProgressProjectsListContainer } from "./ActiveProjectsList.styled";
 import { GetProjects } from "../../../../Services/ProjectService";
 
-const ActiveProjectsList = () => {
+const ActiveProjectsList = (): JSX.Element => {
   const [inProgressProjects, setInProgressProjects] = useState<
     Array<ElementData>
   >([]);
 
-  const getProjects = async () => {
+  const getProjects = async (): Promise<void> => {
     await GetProjects((res: any) =>
       setInProgressProjects(FilterByActiveProgress(res?.data))
     );

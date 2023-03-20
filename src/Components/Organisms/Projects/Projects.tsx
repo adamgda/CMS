@@ -13,7 +13,7 @@ import { GetProjects } from "../../../Services/ProjectService";
 import { useNavigate } from "react-router-dom";
 import { IsEditor } from "../../../Services/MeService";
 
-const Projects = () => {
+const Projects = (): JSX.Element => {
   const [projects, setProjects] = useState<Array<ElementData>>([]);
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,

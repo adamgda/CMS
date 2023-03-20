@@ -6,7 +6,7 @@ import ActiveProjectsList from "../../Molecules/Project/ActiveProjectsList/Activ
 import ReckoningList from "../../Molecules/ReckoningList/ReckoningList";
 import { DashboardContainer } from "./Dashboard.styled";
 
-const Dashboard = () => {
+const Dashboard = (): JSX.Element => {
   return (
     <PageBody>
       <PageContent>

@@ -1,9 +1,9 @@
 import React from "react";
 import MainInput from "../Input/Input";
-import { SearchBarContainer } from "./SearchBar.styled";
 import ManageSearchTwoToneIcon from "@mui/icons-material/ManageSearchTwoTone";
+import { SearchBarContainer } from "./SearchBar.styled";
 
-const SearchBar = () => {
+const SearchBar = (): JSX.Element => {
   return (
     <SearchBarContainer>
       <MainInput small={true}>

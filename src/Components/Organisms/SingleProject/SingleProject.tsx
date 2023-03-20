@@ -5,13 +5,13 @@ import ProjectFullElement from "../../Molecules/Project/ProjectFullElement/Proje
 import Modal from "../../../Hocs/Modal/Modal";
 import ProjectEditForm from "../../Molecules/Project/ProjectEditForm/ProjectEditForm";
 import Section from "../../Atoms/Section/Section";
+import FixedButton from "../../Atoms/Form/FixedButton/FixedButton";
 import { DashboardContainer } from "../Dashboard/Dashboard.styled";
 import { useParams } from "react-router-dom";
 import { ModalDataTypes } from "../../../Hocs/Modal/Modal.types";
-import FixedButton from "../../Atoms/Form/FixedButton/FixedButton";
 import { IsEditor } from "../../../Services/MeService";
 
-const SingleProject = () => {
+const SingleProject = (): JSX.Element => {
   const [modalData, setModalData] = useState<ModalDataTypes>({
     show: false,
     data: null,

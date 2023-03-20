@@ -6,10 +6,10 @@ import Section from "../../Atoms/Section/Section";
 import { useNavigate } from "react-router-dom";
 import { DashboardContainer } from "../Dashboard/Dashboard.styled";
 
-const NewProject = () => {
+const NewProject = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const addProject = () => {
+  const addProject = (): void => {
     navigate("/projects");
   };
 

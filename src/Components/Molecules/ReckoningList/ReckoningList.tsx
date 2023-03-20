@@ -30,7 +30,7 @@ const ReckoningList = (): JSX.Element => {
     type: "reckoningAdd",
   });
 
-  const getReckonings = () => {
+  const getReckonings = (): void => {
     GetReckonings((res: any) => {
       setReckonings(res?.data);
     });

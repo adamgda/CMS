@@ -7,7 +7,9 @@ import { ReckoningAddFormTypes } from "./ReckoningAddForm.types";
 import { useForm } from "react-hook-form";
 import { ReckoningTypes } from "../../ReckoningList.types";
 
-const ReckoningAddForm = ({ addCallback }: ReckoningAddFormTypes) => {
+const ReckoningAddForm = ({
+  addCallback,
+}: ReckoningAddFormTypes): JSX.Element => {
   const [reckoningData] = useState<ReckoningTypes | null>(null);
 
   const {
