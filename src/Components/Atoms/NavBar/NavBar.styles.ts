@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import effects from "../../../Envs/Effects";
+import breakpoint from "../../../Envs/Breakpoints";
 
 export const NavBarContainer = styled.div`
   width: 100%;
@@ -21,6 +22,27 @@ export const NavBarContainer = styled.div`
     display: flex;
     overflow: hidden;
     box-shadow: ${effects.shadow};
+  }
+
+  ${breakpoint.mobile} {
+    max-width: 100%;
+    height: auto;
+    position: fixed;
+    z-index: 999;
+    transform: translateY(-85.5%);
+    transition: transform 0.5s;
+
+    & > div {
+      margin: 1rem;
+      position: static;
+      width: calc(100% - 2em);
+      height: auto;
+    }
+
+    &.show {
+      transform: translateY(0);
+      transition: transform 0.5s;
+    }
   }
 `;
 

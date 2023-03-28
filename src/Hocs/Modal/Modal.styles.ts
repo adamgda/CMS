@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import color from "../../Envs/Colors";
 import effects from "../../Envs/Effects";
+import breakpoint from "../../Envs/Breakpoints";
 import { ModalStyledTypes } from "./Modal.types";
 
 export const ModalContainer = styled.div`
@@ -17,6 +18,10 @@ export const ModalContainer = styled.div`
   background: ${(props: ModalStyledTypes) =>
     props.withoutBg ? "transparent" : color.glass3};
   }
+  
+  ${breakpoint.mobile} {
+    padding: 0;
+  }
 `;
 
 export const ModalBox = styled.div`
@@ -30,6 +35,12 @@ export const ModalBox = styled.div`
   position: relative;
   box-shadow: ${effects.shadow};
   min-height: 200px;
+
+  ${breakpoint.mobile} {
+    width: calc(100% - 2rem);
+    margin: 5rem 0 0;
+    padding: 1.5rem;
+  }
 `;
 
 export const ModalContent = styled.div`

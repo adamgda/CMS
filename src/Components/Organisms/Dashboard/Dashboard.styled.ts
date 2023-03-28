@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "../../../Envs/Breakpoints";
 
 export const DashboardContainer = styled.div`
   display: flex;
@@ -10,6 +11,16 @@ export const DashboardContainer = styled.div`
 
     & + div {
       margin-right: 1.25rem;
+    }
+  }
+
+  ${breakpoint.mobile} {
+    width: 100%;
+    margin: 0;
+    flex-direction: column;
+
+    & > div + div {
+      margin: 1rem 1rem 0;
     }
   }
 `;

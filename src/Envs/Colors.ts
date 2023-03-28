@@ -3,7 +3,7 @@ const color = {
   secondBackground: "#1f384f",
   thirdBackground: "#172b3d",
   main: "#027D8E",
-  white: "#fff",
+  white: "#ffffff",
   darkWhite: "#d0d0d0",
   cta: "#98CB00",
   ctaHover: "#a9e300",

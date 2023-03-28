@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import color from "../../../Envs/Colors";
+import breakpoint from "../../../Envs/Breakpoints";
 
 export const CloseIconContainer = styled.span`
   position: absolute;
@@ -14,6 +15,15 @@ export const CloseIconContainer = styled.span`
   border-radius: 100%;
   border: 0.75rem solid ${color.thirdBackground};
   transition: transform 0.25s;
+  z-index: 9;
+
+  ${breakpoint.mobile} {
+    right: -0.5rem;
+    top: -0.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 0.5rem solid ${color.thirdBackground};
+  }
 
   svg {
     color: ${color.background};

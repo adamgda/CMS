@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import color from "../../../Envs/Colors";
 import effects from "../../../Envs/Effects";
+import breakpoint from "../../../Envs/Breakpoints";
 
 export const ProgressBarContainer = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ export const ProgressBarContainer = styled.div`
 
   & > div {
     margin: 0 0 0 1rem;
+
+    ${breakpoint.mobile} {
+      margin: 0 0 0 3rem;
+    }
   }
 `;
 

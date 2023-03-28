@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import color from "../../../Envs/Colors";
-import font from "../../../Envs/Fonts";
 
 export const SectionContainer = styled.div`
   display: block;

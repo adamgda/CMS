@@ -7,9 +7,9 @@ import { ActiveProgressProjectsListContainer } from "./ActiveProjectsList.styled
 import { GetProjects } from "../../../../Services/ProjectService";
 
 const ActiveProjectsList = (): JSX.Element => {
-  const [inProgressProjects, setInProgressProjects] = useState<
-    Array<ElementData>
-  >([]);
+  const [inProgressProjects, setInProgressProjects] = useState<ElementData[]>(
+    []
+  );
 
   const getProjects = async (): Promise<void> => {
     await GetProjects((res: any) =>

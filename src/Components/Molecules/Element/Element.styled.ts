@@ -3,6 +3,7 @@ import effects from "../../../Envs/Effects";
 import color from "../../../Envs/Colors";
 import font from "../../../Envs/Fonts";
 import { ElementStyledTypes } from "./Element.types";
+import breakpoint from "../../../Envs/Breakpoints";
 
 export const ElementContainer = styled.div`
   display: flex;
@@ -19,6 +20,12 @@ export const ElementContainer = styled.div`
 
   & > div:first-of-type {
     width: 100%;
+  }
+
+  ${breakpoint.mobile} {
+    margin: 1rem 1rem 0;
+    width: calc(100% - 2rem);
+    padding: 1.5rem;
   }
 
   @media screen and (min-width: 1600px) {

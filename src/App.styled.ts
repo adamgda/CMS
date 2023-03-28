@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import color from "./Envs/Colors";
 import font from "./Envs/Fonts";
+import breakpoint from "./Envs/Breakpoints";
+import effects from "./Envs/Effects";
 
 export const AppContainer = styled.div`
   background: ${color.background};
@@ -9,6 +11,10 @@ export const AppContainer = styled.div`
   overflow: hidden;
   position: relative;
   font-family: ${font.main};
+
+  ${breakpoint.mobile} {
+    height: auto;
+  }
 
   & > * {
     position: relative;
@@ -32,5 +38,29 @@ export const AppContainer = styled.div`
 
   .pageBody.loading {
     filter: blur(0.313rem);
+  }
+
+  .Toastify * {
+    font-family: ${font.main};
+    font-size: 0.85rem;
+  }
+
+  *::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: ${color.thirdBackground};
+    border-radius: ${effects.radius};
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: ${color.main};
+    border-radius: ${effects.radius};
+    cursor: pointer;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: ${color.main};
   }
 `;

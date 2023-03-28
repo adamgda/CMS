@@ -2,6 +2,7 @@ import styled from "styled-components";
 import color from "../../../../Envs/Colors";
 import effects from "../../../../Envs/Effects";
 import { FixedButtonStyledTypes } from "./FixedButton.types";
+import breakpoint from "../../../../Envs/Breakpoints";
 
 export const FixedButtonContainer = styled.button`
   position: fixed;
@@ -14,7 +15,7 @@ export const FixedButtonContainer = styled.button`
     props.noBorder ? "5rem" : "7rem"};
   height: ${(props: FixedButtonStyledTypes) =>
     props.noBorder ? "5rem" : "7rem"};
-  display: fixed;
+  display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: ${effects.shadow};
@@ -31,5 +32,17 @@ export const FixedButtonContainer = styled.button`
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  ${breakpoint.mobile} {
+    border: 0;
+    margin: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;

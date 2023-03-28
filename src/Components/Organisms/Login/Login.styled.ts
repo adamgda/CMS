@@ -13,7 +13,7 @@ export const LoginPage = styled.div`
 
 export const LoginLogo = styled.div`
   position: absolute;
-  top: -9rem;
+  top: -8rem;
   z-index: 2;
   width: 100%;
   text-align: center;

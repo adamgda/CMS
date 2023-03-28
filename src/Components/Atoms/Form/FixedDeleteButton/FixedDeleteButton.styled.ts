@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import effects from "../../../../Envs/Effects";
 import color from "../../../../Envs/Colors";
+import breakpoint from "../../../../Envs/Breakpoints";
 
 export const FixedButtonContainer = styled.button`
   position: fixed;
@@ -17,6 +18,11 @@ export const FixedButtonContainer = styled.button`
   box-shadow: ${effects.shadow};
   color: ${color.background};
   border: none;
+
+  ${breakpoint.mobile} {
+    right: 5rem;
+    bottom: 0.5rem;
+  }
 
   svg {
     width: 1.5rem;
