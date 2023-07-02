@@ -9,7 +9,7 @@ export const ElementContainer = styled.div`
   display: flex;
   margin: 0 0.75rem 1.5rem;
   background: ${color.thirdBackground};
-  padding: 2rem;
+  padding: 2rem 2rem 1.25rem;
   border-radius: ${effects.radius};
   width: calc(
     ${(props: ElementStyledTypes) => (props.fullWidth ? 100 : 50)}% - 2rem
