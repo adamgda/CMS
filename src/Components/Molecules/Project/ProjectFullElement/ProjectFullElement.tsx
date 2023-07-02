@@ -13,7 +13,10 @@ import {
   ProjectResponseTypes,
 } from "../../../../Services/ProjectService.types";
 
-const ProjectFullElement = ({ id }: ProjectFullElementTypes): JSX.Element => {
+const ProjectFullElement = ({
+  id,
+  withoutProgress,
+}: ProjectFullElementTypes): JSX.Element => {
   const [, setProjectUpdateTime] = useState<Date>();
   const [projectData, setProjectData] = useState<ProjectResponseTypes>();
 
@@ -46,15 +49,17 @@ const ProjectFullElement = ({ id }: ProjectFullElementTypes): JSX.Element => {
         url={projectData?.link}
         progress={projectData?.progress}
       />
-      <ProjectDataContainer>
-        <ProgressList
-          list={projectData?.progress}
-          editCallback={projectUpdate}
-        />
-        {projectData?.description && (
-          <ProjectDescription description={projectData?.description} />
-        )}
-      </ProjectDataContainer>
+      {!withoutProgress && (
+        <ProjectDataContainer>
+          <ProgressList
+            list={projectData?.progress}
+            editCallback={projectUpdate}
+          />
+          {projectData?.description && (
+            <ProjectDescription description={projectData?.description} />
+          )}
+        </ProjectDataContainer>
+      )}
     </>
   ) : (
     <>...</>
