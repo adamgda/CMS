@@ -1,8 +1,6 @@
-export interface UserListTypes {
-  id: number;
-  login: string;
-  email: string;
-  group_id: number;
+export interface UserEditFormTypes {
+  id: number | null;
+  callback: () => void;
 }
 
 export interface UserFormTypes {
