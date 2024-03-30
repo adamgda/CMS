@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import color from "./Envs/Colors";
-import font from "./Envs/Fonts";
-import breakpoint from "./Envs/Breakpoints";
-import effects from "./Envs/Effects";
+import color from "@env/Colors";
+import font from "@env/Fonts";
+import breakpoint from "@env/Breakpoints";
+import effects from "@env/Effects";
 
 export const AppContainer = styled.div`
   background: ${color.background};
