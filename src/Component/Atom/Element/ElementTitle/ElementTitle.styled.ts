@@ -9,10 +9,9 @@ export const ElementTitleContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-family: ${font.main};
-  color: ${color.white};
-  font-weight: bold;
+  color: ${color.darkWhite};
   position: relative;
 
   ${breakpoint.mobile} {

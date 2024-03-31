@@ -7,12 +7,12 @@ import { InputTypes } from "./Input.types";
 export const MainInput = ({
   label,
   children,
-  small = false,
+  small,
   required = false,
   isError = false,
 }: InputTypes): JSX.Element => {
   return (
-    <MainInputContainer small={small}>
+    <MainInputContainer small={small || false}>
       {label && <span className={required ? "required" : ""}>{label}</span>}
       <div className={isError ? "isError" : ""}>
         {children}

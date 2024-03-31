@@ -92,4 +92,13 @@ export const MainInputContainer = styled.div`
       vertical-align: middle;
     }
   }
+
+  input::placeholder {
+    color: ${color.darkWhite};
+    opacity: 1;
+  }
+
+  input::-ms-input-placeholder {
+    color: ${color.darkWhite};
+  }
 `;

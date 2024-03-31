@@ -1,6 +1,7 @@
 import { backToLogin, Post } from "./ApiService";
 import { AxiosResponse } from "axios";
-import { LoginResponseTypes } from "./AuthService.types";
+import { LoginResponseData, LoginResponseTypes } from "./AuthService.types";
+import { LoginTypes } from "@organism/Login/Login.types";
 
 export const SetSessionData = (data: LoginResponseTypes): void | null => {
   if (!data) return null;
@@ -16,11 +17,11 @@ export const SetSessionData = (data: LoginResponseTypes): void | null => {
 };
 
 export const LogIn = (
-  data: unknown,
+  data: LoginTypes,
   callback: Function
-): Promise<AxiosResponse<LoginResponseTypes> | void> => {
-  return Post(`/login`, data, (res: any) => {
-    SetSessionData(res?.data);
+): Promise<void | AxiosResponse<unknown, any>> => {
+  return Post(`/login`, data, (res: LoginResponseData) => {
+    SetSessionData(res.data);
     callback();
   });
 };

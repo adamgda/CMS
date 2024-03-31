@@ -10,9 +10,11 @@ export const Section = ({
   titleComponent,
 }: SectionTypes): JSX.Element => {
   return (
-    <ElementContainer fullWidth>
+    <ElementContainer>
       <div>
-        <ElementTitle title={title}>{titleComponent}</ElementTitle>
+        {titleComponent && (
+          <ElementTitle title={title}>{titleComponent}</ElementTitle>
+        )}
         <SectionContainer>{children}</SectionContainer>
       </div>
     </ElementContainer>

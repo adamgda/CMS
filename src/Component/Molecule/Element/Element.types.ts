@@ -9,15 +9,11 @@ export interface ProgressElement {
 
 export interface ElementTypes extends ElementTitleTypes, ElementTasksInfoTypes {
   showDetailsCallback: () => void;
-  progress: ProgressElement[];
-  link: string;
 }
 
-export interface ElementData {
+export interface ElementData extends ElementTitleTypes, ElementTasksInfoTypes {
   id?: number;
   name: string;
-  progress: ProgressElement[];
-  link: string;
   description: string;
   groupId: string;
   group_id?: string;

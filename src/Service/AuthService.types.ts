@@ -4,3 +4,7 @@ export interface LoginResponseTypes {
   isAdmin: boolean;
   login: string;
 }
+
+export interface LoginResponseData {
+  data: LoginResponseTypes;
+}

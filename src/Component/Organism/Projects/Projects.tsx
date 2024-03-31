@@ -3,31 +3,20 @@ import { PageBody } from "@hoc/PageBody";
 import { PageContent } from "@hoc/PageContent";
 import { ElementsList } from "@atom/Element";
 import { Element } from "@molecule/Element";
-import { FixedButton } from "@atom/Form";
-import { Modal } from "@hoc/Modal";
-import { ProjectFullElement, ProjectEditForm } from "@organism/Project";
-import { ModalDataTypes } from "@hoc/Modal/Modal.types";
+import { FixedButton, MainInput } from "@atom/Form";
 import { ElementData } from "@molecule/Element/Element.types";
 import { GetProjects } from "@service/ProjectService";
 import { useNavigate } from "react-router-dom";
 import { IsEditor } from "@service/MeService";
+import { ProjectsSearchStyled } from "./Projects.styled";
 
 export const Projects = (): JSX.Element => {
   const [projects, setProjects] = useState<Array<ElementData>>([]);
-  const [modalData, setModalData] = useState<ModalDataTypes>({
-    show: false,
-    data: null,
-    type: "",
-  });
-
+  const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
   const goToProjectAddPage = (): void => {
     navigate("/new-project");
-  };
-
-  const closeModal = (): void => {
-    setModalData({ show: false, data: null, type: "" });
   };
 
   const goToProjectDetailsPage = (id: number): void => {
@@ -38,28 +27,36 @@ export const Projects = (): JSX.Element => {
     await GetProjects((res: any) => setProjects(res?.data));
   };
 
-  const callback = (): void => {
-    closeModal();
-    void getProjects();
-  };
-
   useEffect(() => {
     void getProjects();
   }, []);
 
+  const filteredProjects = projects?.filter((project) =>
+    project?.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <PageBody>
       <PageContent>
+        <ProjectsSearchStyled>
+          <MainInput>
+            <input
+              type="text"
+              placeholder="Szukaj..."
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+          </MainInput>
+        </ProjectsSearchStyled>
         <ElementsList>
-          {projects?.map((project) => {
+          {filteredProjects?.map((project) => {
             return (
               <Element
                 key={project?.id}
-                title={project?.name}
-                progress={project?.progress}
-                link={project?.link}
+                title={project?.name || ""}
+                link={project?.link || ""}
                 showDetailsCallback={() =>
-                  project?.id && goToProjectDetailsPage(project?.id)
+                  project?.id && goToProjectDetailsPage(project.id)
                 }
               />
             );
@@ -67,29 +64,6 @@ export const Projects = (): JSX.Element => {
         </ElementsList>
       </PageContent>
       {IsEditor && <FixedButton type="new" callback={goToProjectAddPage} />}
-      {modalData?.show && (
-        <>
-          {modalData?.type === "details" ? (
-            <Modal
-              size="big"
-              closeCallback={closeModal}
-              padding={"1rem 2rem 2rem"}
-            >
-              <ProjectFullElement id={modalData?.data} />
-            </Modal>
-          ) : (
-            IsEditor && (
-              <Modal
-                size="big"
-                closeCallback={closeModal}
-                padding={"1rem 2rem 2rem"}
-              >
-                <ProjectEditForm id={modalData?.data} callback={callback} />
-              </Modal>
-            )
-          )}
-        </>
-      )}
     </PageBody>
   );
 };

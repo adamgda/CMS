@@ -5,7 +5,7 @@ import { ProjectResponseTypes } from "./ProjectService.types";
 
 export const GetProjects = (
   callback: Function
-): Promise<AxiosResponse<ProjectResponseTypes[]> | void> => {
+): Promise<void | AxiosResponse<unknown, any>> => {
   const url = IsAdmin ? "/project/all" : "/project";
   return Get(url, callback);
 };
@@ -13,7 +13,7 @@ export const GetProjects = (
 export const GetProjectDetails = (
   id: number,
   callback: Function
-): Promise<AxiosResponse<ProjectResponseTypes> | void> => {
+): Promise<void | AxiosResponse<unknown, any>> => {
   return Get(`/project/${id}`, callback);
 };
 

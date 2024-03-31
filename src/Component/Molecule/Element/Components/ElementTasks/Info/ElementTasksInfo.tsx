@@ -6,13 +6,13 @@ import { ElementTasksInfoTypes } from "./ElementTasksInfo.types";
 export const ElementTasksInfo = ({
   progress,
 }: ElementTasksInfoTypes): JSX.Element => {
-  const sum = progress?.length;
+  const sum = progress?.length || 0;
   const complete = progress?.filter((el) => el.done).length;
 
   return (
     <ElementTasksInfoContainer>
       <BeenhereTwoToneIcon />
-      {progress?.length > 0 ? (
+      {sum > 0 ? (
         <span>
           {complete ? complete : "0"} / {sum ? sum : "0"}
         </span>

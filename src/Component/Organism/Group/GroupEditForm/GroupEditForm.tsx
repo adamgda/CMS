@@ -5,7 +5,6 @@ import { TopBar } from "@molecule/TopBar";
 import { FixedButton } from "@atom/Form/FixedButton";
 import { FixedDeleteButton } from "@atom/Form/FixedDeleteButton";
 import { Modal } from "@hoc/Modal";
-
 import { useForm } from "react-hook-form";
 import { ModalDataTypes } from "@hoc/Modal/Modal.types";
 import { MainButton } from "@atom/Form/Button/Button.styled";

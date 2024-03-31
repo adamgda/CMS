@@ -5,14 +5,14 @@ import { UserFormTypes } from "@organism/User/UserEditForm";
 
 export const GetUsers = (
   callback: Function
-): Promise<AxiosResponse<UserResponseTypes[]> | void> => {
+): Promise<void | AxiosResponse<unknown, any>> => {
   return Get(`/user`, callback);
 };
 
 export const GetUserDetails = (
   id: number,
   callback: Function
-): Promise<AxiosResponse<UserResponseTypes[]> | void> => {
+): Promise<void | AxiosResponse<unknown, any>> => {
   return GetUsers((res: any) => {
     callback(res?.data.filter((res: any) => res.id === id)[0]);
   });
@@ -22,7 +22,7 @@ export const EditUserDetails = (
   id: number,
   data: UserResponseTypes | UserFormTypes,
   callback: Function
-): Promise<AxiosResponse<UserResponseTypes> | void> => {
+): Promise<void | AxiosResponse<unknown, any>> => {
   return Patch(`/user/${id}`, data, callback);
 };
 

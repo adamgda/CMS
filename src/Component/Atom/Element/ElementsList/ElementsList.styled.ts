@@ -5,8 +5,8 @@ import breakpoint from "@env/Breakpoints";
 export const ElementsListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -1rem;
-  width: calc(100% + 2rem);
+  margin: 1rem -1rem 0;
+  width: calc(100% + 1.75rem);
 
   ${breakpoint.mobile} {
     margin: 0;
