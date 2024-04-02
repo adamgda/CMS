@@ -3,6 +3,7 @@ import color from "@env/Colors";
 import font from "@env/Fonts";
 import effects from "@env/Effects";
 import { TopBarStyledTypes } from "./TopBar.types";
+import breakpoint from "@env/Breakpoints";
 
 export const TopBarContainer = styled.div`
   display: flex;
@@ -15,6 +16,10 @@ export const TopBarContainer = styled.div`
   height: 5rem;
   align-items: center;
   justify-content: space-between;
+
+  ${breakpoint.mobile} {
+    margin: 0;
+  }
 
   h1 {
     font-family: ${font.main};

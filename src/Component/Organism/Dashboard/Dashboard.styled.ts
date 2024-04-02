@@ -20,7 +20,7 @@ export const DashboardContainer = styled.div`
     flex-direction: column;
 
     & > div + div {
-      margin: 1rem 1rem 0;
+      margin: 0.25rem 0.75rem 0.75rem;
     }
   }
 `;

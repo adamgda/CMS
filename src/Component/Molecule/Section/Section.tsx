@@ -12,9 +12,7 @@ export const Section = ({
   return (
     <ElementContainer>
       <div>
-        {titleComponent && (
-          <ElementTitle title={title}>{titleComponent}</ElementTitle>
-        )}
+        <ElementTitle title={title}>{titleComponent}</ElementTitle>
         <SectionContainer>{children}</SectionContainer>
       </div>
     </ElementContainer>

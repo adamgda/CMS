@@ -50,7 +50,7 @@ export const AppContainer = styled.div`
   }
 
   *::-webkit-scrollbar-track {
-    background: ${color.thirdBackground};
+    background: ${color.background};
     border-radius: ${effects.radius};
   }
 

@@ -9,6 +9,11 @@ export const PageContentContainer = styled.div`
   height: calc(100vh - 4rem);
   position: relative;
 
+  ${breakpoint.mobile} {
+    margin: 0;
+    padding: 0;
+  }
+
   & > div {
     overflow: auto;
     height: calc(100vh - 4rem);
@@ -17,7 +22,7 @@ export const PageContentContainer = styled.div`
     padding: 0 1rem 0 0;
 
     ${breakpoint.mobile} {
-      margin: 3.5rem 0 0;
+      margin: 3.75rem 0 0;
       padding: 0;
     }
   }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import effects from "@env/Effects";
 import color from "@env/Colors";
 import font from "@env/Fonts";
+import breakpoint from "@env/Breakpoints";
 
 export const ElementContainer = styled.div`
   display: flex;
@@ -13,6 +14,11 @@ export const ElementContainer = styled.div`
   font-family: ${font.main};
   justify-content: space-between;
   align-items: center;
+
+  ${breakpoint.mobile} {
+    width: auto;
+    margin: 0.75rem;
+  }
 
   & > div {
     width: 100%;

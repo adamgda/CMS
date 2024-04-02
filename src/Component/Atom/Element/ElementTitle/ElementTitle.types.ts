@@ -1,5 +1,5 @@
 export interface ElementTitleTypes {
   title: string;
   link?: string;
-  children?: JSX.Element;
+  children?: JSX.Element | undefined;
 }

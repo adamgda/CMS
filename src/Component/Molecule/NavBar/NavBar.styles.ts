@@ -33,9 +33,9 @@ export const NavBarContainer = styled.div`
     transition: transform 0.5s;
 
     & > div {
-      margin: 1rem;
+      margin: 0.75rem;
       position: static;
-      width: calc(100% - 2em);
+      width: auto;
       height: auto;
     }
 
