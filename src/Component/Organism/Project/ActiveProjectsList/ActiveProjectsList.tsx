@@ -24,7 +24,7 @@ export const ActiveProjectsList = (): JSX.Element => {
   return (
     <ActiveProgressProjectsListContainer>
       {inProgressProjects?.map((project) => (
-        <Section title="Projekt w trakcie" key={project.id}>
+        <Section mobileAutoWidth title="Projekt w trakcie" key={project.id}>
           <ProjectFullElement id={project.id || 0} withoutProgress />
         </Section>
       ))}

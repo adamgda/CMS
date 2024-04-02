@@ -13,6 +13,6 @@ export const ProjectsSearchStyled = styled.div`
 
   ${breakpoint.mobile} {
     padding: 0 0.75rem;
-    margin: 1rem 0 0.5rem;
+    margin: 0.5rem 0;
   }
 `;

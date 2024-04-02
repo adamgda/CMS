@@ -4,8 +4,8 @@ import { ProgressBarTypes } from "./ProgressBar.types";
 import { ProgressBarContainer, ProgressBarLine } from "./ProgressBar.styled";
 
 export const ProgressBar = ({ progress }: ProgressBarTypes): JSX.Element => {
-  const sum = progress?.length;
-  const complete = progress?.filter((el) => el.done).length;
+  const sum = progress?.length || 0;
+  const complete = progress?.filter((el) => el.done).length || 0;
   const currentPercent = (complete / sum) * 100;
 
   return (

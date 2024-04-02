@@ -33,7 +33,7 @@ export const MainInputContainer = styled.div`
   input,
   textarea,
   select {
-    padding: ${(props: InputStyledTypes) => (props.small ? "1rem" : "1.25rem")};
+    padding: ${(props: InputStyledTypes) => (props.small ? "0.75rem" : "1rem")};
     background: ${color.secondBackground};
     display: block;
     border: 0;

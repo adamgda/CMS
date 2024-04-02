@@ -3,6 +3,7 @@ import effects from "@env/Effects";
 import color from "@env/Colors";
 import font from "@env/Fonts";
 import breakpoint from "@env/Breakpoints";
+import { ElementStyledTypes } from "./Element.types";
 
 export const ElementContainer = styled.div`
   display: flex;
@@ -16,8 +17,9 @@ export const ElementContainer = styled.div`
   align-items: center;
 
   ${breakpoint.mobile} {
-    width: auto;
-    margin: 0.75rem;
+    width: ${(props: ElementStyledTypes) =>
+      props.mobileAutoWidth ? "auto" : "100%"};
+    margin: 0.25rem 0.75rem;
   }
 
   & > div {

@@ -4,4 +4,5 @@ export interface SectionTypes extends ElementTitleTypes {
   children: JSX.Element;
   title: string;
   titleComponent?: JSX.Element;
+  mobileAutoWidth?: boolean | undefined;
 }

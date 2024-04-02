@@ -15,10 +15,6 @@ export const ProjectDataContainer = styled.div`
 
     & > div {
       width: 100%;
-
-      &:last-of-type {
-        margin: 0 0 2rem !important;
-      }
     }
   }
 `;

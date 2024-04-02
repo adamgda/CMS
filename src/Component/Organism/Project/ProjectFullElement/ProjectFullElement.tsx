@@ -42,9 +42,8 @@ export const ProjectFullElement = ({
   return projectData ? (
     <>
       <ProjectHeader
-        name={projectData?.name}
-        url={projectData?.link}
-        progress={projectData?.progress}
+        name={projectData?.name || ""}
+        url={projectData?.link || ""}
       />
       {!withoutProgress && (
         <ProjectDataContainer>
@@ -53,7 +52,7 @@ export const ProjectFullElement = ({
             editCallback={projectUpdate}
           />
           {projectData?.description && (
-            <ProjectDescription description={projectData?.description} />
+            <ProjectDescription description={projectData.description} />
           )}
         </ProjectDataContainer>
       )}

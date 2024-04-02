@@ -5,7 +5,7 @@ import { ProjectsPingListContainer } from "./ProjectsPingList.styled";
 
 export const ProjectsPingList = (): JSX.Element => {
   return (
-    <Section title="Projekty offline">
+    <Section mobileAutoWidth title="Projekty offline">
       <ProjectsPingListContainer>
         <HandymanTwoToneIcon fontSize="large" />
       </ProjectsPingListContainer>

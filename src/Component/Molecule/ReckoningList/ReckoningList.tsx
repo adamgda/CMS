@@ -71,6 +71,7 @@ export const ReckoningList = (): JSX.Element => {
 
   return (
     <Section
+      mobileAutoWidth
       title="Rozliczenia"
       titleComponent={<ReckoningAddButton addCallback={reckoningModalShow} />}
     >

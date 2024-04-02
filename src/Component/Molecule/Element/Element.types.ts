@@ -7,7 +7,14 @@ export interface ProgressElement {
   label: string;
 }
 
-export interface ElementTypes extends ElementTitleTypes, ElementTasksInfoTypes {
+export interface ElementStyledTypes {
+  mobileAutoWidth?: boolean | undefined;
+}
+
+export interface ElementTypes
+  extends ElementTitleTypes,
+    ElementTasksInfoTypes,
+    ElementStyledTypes {
   showDetailsCallback: () => void;
 }
 

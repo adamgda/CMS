@@ -26,7 +26,7 @@ export const ProgressList = ({
     deleteCallback && deleteCallback(id);
   };
 
-  return list?.length > 0 ? (
+  return list && list.length > 0 ? (
     <ProgressListContainer>
       <div>
         {list?.map((el) => (

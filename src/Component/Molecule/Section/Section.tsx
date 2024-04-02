@@ -8,9 +8,10 @@ export const Section = ({
   title,
   children,
   titleComponent,
+  mobileAutoWidth,
 }: SectionTypes): JSX.Element => {
   return (
-    <ElementContainer>
+    <ElementContainer mobileAutoWidth={mobileAutoWidth}>
       <div>
         <ElementTitle title={title}>{titleComponent}</ElementTitle>
         <SectionContainer>{children}</SectionContainer>

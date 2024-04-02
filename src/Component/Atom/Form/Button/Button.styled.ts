@@ -4,7 +4,7 @@ import effects from "@env/Effects";
 import font from "@env/Fonts";
 
 export const MainButton = styled.button`
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: block;
   border: 0;
   width: 100%;

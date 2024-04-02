@@ -32,8 +32,8 @@ export const SingleProject = (): JSX.Element => {
     <PageBody>
       <PageContent>
         <DashboardContainer>
-          <Section title={"Szczegóły projektu"}>
-            {projectId ? <ProjectFullElement id={projectId} /> : <></>}
+          <Section mobileAutoWidth title={"Szczegóły projektu"}>
+            {projectId ? <ProjectFullElement id={projectId} /> : <div />}
           </Section>
         </DashboardContainer>
       </PageContent>
